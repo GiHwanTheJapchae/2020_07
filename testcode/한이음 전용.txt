@@ -1,0 +1,28 @@
+�����ߵɰ�
+���� ��������ڵ� Ŭ����ȭ
+������� �ڵ忡 �޽��� ������ ��� ���� �ڵ�
+��� ���� �ڵ�
+	(������?)�������� �� �޽��� �����ؼ� ���������� GPS ��δ�� ���� �Լ��� �ֱ�
+	������- ������ ������ ��ǥ�� �Ÿ�, ���� ����ؼ� yaw��? head �Լ� �����ؼ� ��� ���� ������  -> ������ �Ÿ���ŭ ���ư���
+	Ư�̻���
+		dronekit ���̺귯�� ����ȵ� - dronekit���� ���� �Լ� ¥����
+		pymavlink �Լ� ��밡��, GPS ��δ�� ���� �Լ� ����
+		10���� �����̴� �Լ� ��� - ��� ������(����) �α� ��� - �״�� ����, �ݺ�
+		��� 10���� �����̴� �Լ�
+		https://dev.px4.io/v1.9.0/en/robotics/dronekit.html
+ 		wp = get_location_offset_meters(wp, 0, 10, 0);
+		cmd = Command(0,0,0, mavutil.mavlink.MAV_FRAME_GLOBAL_RELATIVE_ALT, mavutil.mavlink.MAV_CMD_MAV_WAYPOINT, 0, 1, 0, 0, 0, 0, wp.lat, wp.lon, wp.alt)
+		cmd.add(cmd)
+		cmds.uploat()
+		���� �Ķ���� get�Լ� ���, parameter �����ؼ� �����ð� ������ get(time.sleep()�Լ� ���)
+		ekf - extended kalman filter - acc, gyro ���� �̿��ؼ� navigation ����
+		testcode �����ߴ� ����Ʈ �ּ� - https://www.ardusub.com/developers/pymavlink.html
+
+
+		  while True:
+    print(" Altitude: ", vehicle.location.global_relative_frame.alt)
+    #Break and return from function just below target altitude.
+    if vehicle.location.global_relative_frame.alt >= aTargetAltitude*0.95:
+      print("Reached target altitude")
+      break
+    time.sleep(1)
